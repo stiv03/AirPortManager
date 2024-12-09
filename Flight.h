@@ -39,6 +39,8 @@ public:
 
     Aircraft getAircraft() const;
 
+    void setAircraft(const Aircraft &aircraft);
+
     void checkAircraftCompatibility() const;
 
     friend std::ostream& operator<<(std::ostream& os, const Flight& flight);

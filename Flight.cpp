@@ -65,6 +65,9 @@ double Flight::calculateFlightDuration() {
 double Flight::calculateFlightCost() const {
     return aircraft.calculateFlightCost(distance, aircraft.getAircraftClass().getSeats());
 }
+void Flight::setAircraft(const Aircraft& aircraft) {
+    this->aircraft = aircraft;
+}
 
 Aircraft Flight::getAircraft() const {
     return aircraft;
@@ -84,6 +87,7 @@ std::ostream& operator<<(std::ostream& os, const Flight& flight) {
        << "До: " << flight.destination << "\n"
        << "Разстояние: " << flight.distance << " км\n"
        << "Продължителност на полета: " << flight.flightDuration << " часа\n"
+       << "Извъшва се с самолет : " << flight.getAircraft().getAircraftId()<< " \n"
     << "Цена на полета: " << std::fixed << std::setprecision(0) << flight.calculateFlightCost() << " $\n";
     return os;
 }

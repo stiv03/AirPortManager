@@ -5,6 +5,8 @@
 int main() {
     FlightManager manager;
 
+    manager.loadFromFile();
+
     Menu menu(manager);
     int choice;
 

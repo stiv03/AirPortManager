@@ -116,7 +116,7 @@ void Menu::handleFindFlightsByDestination() const {
     } else {
         std::cout << "\n--- Полети за " << destination << " ---\n";
         for (const auto& flight : flights) {
-            std::cout << flight.getFlightId() << std::endl;
+            std::cout << flight.getFlightId() + " със самолет " + flight.getAircraft().getAircraftId() << std::endl;
         }
     }
 }
