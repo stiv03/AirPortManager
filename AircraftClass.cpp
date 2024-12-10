@@ -15,6 +15,22 @@ AircraftClass::AircraftClass(std::string manufacturer, std::string model, int se
     setFuelConsumptionPerKMPerSeat(fuelConsumptionPerKMPerSeat);
     setFuelTankCapacity(fuelTankCapacity);
     setAverageSpeed(averageSpeed);
+    autoDetermineType();
+}
+
+void AircraftClass::autoDetermineType() {
+    if (seats < 100 && minRunwayLength < 2000) {
+        type = Type::A; // Малък самолет
+    } else if (seats >= 100 && seats <= 200 &&
+               minRunwayLength >= 2000 && minRunwayLength <= 3000) {
+        type = Type::B; // Среден самолет
+               } else {
+                   type = Type::C; // Голям самолет
+               }
+}
+
+Type AircraftClass::getType() const {
+    return type;
 }
 
 std::string AircraftClass::getManufacturer() const {
@@ -98,8 +114,18 @@ double AircraftClass::calculateMaxFlightDistance() const {
     return fuelTankCapacity / fuelConsumptionPerKMPerSeat;
 }
 
+std::ostream& operator<<(std::ostream& os, const Type& type) {
+    switch (type) {
+        case Type::A: os << "A"; break;
+        case Type::B: os << "B"; break;
+        case Type::C: os << "C"; break;
+    }
+    return os;
+}
+
 std::ostream& operator<<(std::ostream& os, const AircraftClass& aircraftClass) {
     os << "Клас на самолета\n"
+       << "Клас: " << aircraftClass.type << "\n"
        << "Прозиводител: " << aircraftClass.manufacturer << "\n"
        << "Модел: " << aircraftClass.model << "\n"
        << "Седалки: " << aircraftClass.seats << "\n"

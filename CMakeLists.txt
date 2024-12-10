@@ -13,4 +13,5 @@ add_executable(AirPort main.cpp
         FlightManager.h
         FlightManager.cpp
         Menu.h
-        Menu.cpp)
+        Menu.cpp
+        Type.h)

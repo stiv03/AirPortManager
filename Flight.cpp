@@ -6,8 +6,8 @@ Flight::Flight()
     : flightId("Неизвестен"), departure("Неизвестен"), destination("Неизвестен"), distance(0), flightDuration(0) {}
 
 Flight::Flight(const std::string& flightId, const std::string& departure, const std::string& destination,
-               double distance, const Aircraft& aircraft)
-    : flightId(flightId), departure(departure), destination(destination), distance(distance), aircraft(aircraft)
+               double distance, const Aircraft& aircraft,int passengers)
+    : flightId(flightId), departure(departure), destination(destination), distance(distance), aircraft(aircraft), passengers(passengers)
 {
     calculateFlightDuration();
 }
@@ -73,6 +73,25 @@ Aircraft Flight::getAircraft() const {
     return aircraft;
 }
 
+int Flight::getPassengers() const {
+    return passengers;
+}
+
+void Flight::setPassengers(int passengers) {
+    if (passengers <= 0) {
+        throw std::invalid_argument("Броя на пасажерите трябва да бъде положителен.");
+    }
+    this->passengers = passengers;
+}
+
+void Flight::checkPassengersCompatibility() const {
+    if (passengers > aircraft.getAircraftClass().getSeats()) {
+        throw std::invalid_argument("Броя на пасажерите e прекалено голямо за този самолет, самолета не е съвместим");
+    }
+    std::cout << "Броя на пасажерите е съвместим с този самолет " << std::endl;
+}
+
+
 void Flight::checkAircraftCompatibility() const {
     if (distance > aircraft.getAircraftClass().calculateMaxFlightDistance()) {
         throw std::invalid_argument("Разстоянието e прекалено голямо за този самолет, самолета не е съвместим");
@@ -88,6 +107,7 @@ std::ostream& operator<<(std::ostream& os, const Flight& flight) {
        << "Разстояние: " << flight.distance << " км\n"
        << "Продължителност на полета: " << flight.flightDuration << " часа\n"
        << "Извъшва се с самолет : " << flight.getAircraft().getAircraftId()<< " \n"
+       << "Брой пътници : " << flight.getPassengers()<< " \n"
     << "Цена на полета: " << std::fixed << std::setprecision(0) << flight.calculateFlightCost() << " $\n";
     return os;
 }

@@ -7,8 +7,8 @@
 
 class FlightManager {
 private:
-    std::vector<Flight> flights; // Списък от всички полети
-    std::vector<Aircraft> aircrafts; // Списък от всички самолети
+    std::vector<Flight> flights;
+    std::vector<Aircraft> aircrafts;
 
 public:
     void addFlight(const Flight& flight);

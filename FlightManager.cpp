@@ -5,10 +5,22 @@
 #include <exception>
 
 void FlightManager::addFlight(const Flight& flight) {
+    for (const auto& existingFlight : flights) {
+        if (existingFlight.getFlightId() == flight.getFlightId()) {
+            std::cerr << "Полет с ID " << flight.getFlightId() << " вече съществува.\n";
+            return; // Вече съществува, не го добавяме отново
+        }
+    }
     flights.push_back(flight);
 }
 
 void FlightManager::addAircraft(const Aircraft& aircraft) {
+    for (const auto& existingAircraft : aircrafts) {
+        if (existingAircraft.getAircraftId() == aircraft.getAircraftId()) {
+            std::cerr << "Самолет с ID " << aircraft.getAircraftId() << " вече съществува.\n";
+            return; // Вече съществува, не го добавяме отново
+        }
+    }
     aircrafts.push_back(aircraft);
 }
 
@@ -33,9 +45,6 @@ void FlightManager::displayAllFlights() const {
 }
 
 void FlightManager::displayAllAircrafts() const {
-
-    const_cast<FlightManager*>(this)->loadFromFile();
-
     if (aircrafts.empty()) {
         std::cout << "Няма добавени самолети\n";
     } else {
@@ -45,7 +54,6 @@ void FlightManager::displayAllAircrafts() const {
     }
 }
 
-
 void FlightManager::saveToFile() const {
     try {
         if (aircrafts.empty() && flights.empty()) {
@@ -53,12 +61,13 @@ void FlightManager::saveToFile() const {
             return;
         }
 
-        std::ofstream aircraftFile("aircrafts.txt", std::ios::out | std::ios::app);
+        // Изчистваме съдържанието на файла и след това записваме
+        std::ofstream aircraftFile("aircrafts.txt", std::ios::out); // std::ios::out по подразбиране "truncate"-ва файла
         if (!aircraftFile) {
             throw std::ios_base::failure("Неуспешно отваряне на файла aircrafts.txt");
         }
 
-        std::ofstream flightFile("flights.txt", std::ios::out | std::ios::app);
+        std::ofstream flightFile("flights.txt", std::ios::out); // std::ios::out по подразбиране изтрива старото съдържание
         if (!flightFile) {
             throw std::ios_base::failure("Неуспешно отваряне на файла flights.txt");
         }
@@ -80,7 +89,8 @@ void FlightManager::saveToFile() const {
                        << flight.getDeparture() << " "
                        << flight.getDestination() << " "
                        << flight.getDistance() << " "
-                       << flight.getAircraft().getAircraftId() << "\n";
+                       << flight.getAircraft().getAircraftId() << " "
+                       << flight.getPassengers() << "\n";
         }
 
     } catch (const std::exception& e) {
@@ -89,6 +99,10 @@ void FlightManager::saveToFile() const {
 }
 
 void FlightManager::loadFromFile() {
+    // Изчистваме списъците с самолети и полети, за да не добавяме дублиращи записи
+    aircrafts.clear();
+    flights.clear();
+
     std::ifstream aircraftFile("aircrafts.txt");
     std::ifstream flightFile("flights.txt");
 
@@ -113,7 +127,7 @@ void FlightManager::loadFromFile() {
                 Aircraft newAircraft(aircraftId, aircraftClass, crewCost);
                 aircrafts.push_back(newAircraft);
             }
-               }
+        }
     }
 
     if (flightFile.is_open()) {
@@ -124,14 +138,24 @@ void FlightManager::loadFromFile() {
 
             std::istringstream iss(line);
             std::string flightId, departure, destination, aircraftId;
+            int passengers;
             double distance;
 
-            if (iss >> flightId >> departure >> destination >> distance >> aircraftId) {
-                for (const auto& aircraft : aircrafts) {
-                    if (aircraft.getAircraftId() == aircraftId) {
-                        Flight newFlight(flightId, departure, destination, distance, aircraft);
-                        flights.push_back(newFlight);
+            if (iss >> flightId >> departure >> destination >> distance >> aircraftId >> passengers) {
+                bool exists = false;
+                for (const auto& flight : flights) {
+                    if (flight.getFlightId() == flightId) {
+                        exists = true;
                         break;
+                    }
+                }
+                if (!exists) {
+                    for (const auto& aircraft : aircrafts) {
+                        if (aircraft.getAircraftId() == aircraftId) {
+                            Flight newFlight(flightId, departure, destination, distance, aircraft, passengers);
+                            flights.push_back(newFlight);
+                            break;
+                        }
                     }
                 }
             } else {
@@ -143,4 +167,3 @@ void FlightManager::loadFromFile() {
     aircraftFile.close();
     flightFile.close();
 }
-

@@ -58,6 +58,7 @@ void Menu::handleAddAircraft() {
 
 void Menu::handleAddFlight() {
     std::string flightId, departure, destination, aircraftId;
+    int  passengers;
     double distance;
 
     std::cout << "Въведете ID на полета: ";
@@ -76,6 +77,9 @@ void Menu::handleAddFlight() {
 
     std::cin >> aircraftId;
 
+    std::cout << "Въведете броя на пасажерите: ";
+    std::cin >> passengers;
+
     Aircraft* selectedAircraft = nullptr;
     for (const auto& aircraft : manager.getAircrafts()) {
         if (aircraft.getAircraftId() == aircraftId) {
@@ -85,8 +89,9 @@ void Menu::handleAddFlight() {
     }
 
     if (selectedAircraft) {
-        Flight newFlight(flightId, departure, destination, distance, *selectedAircraft);
+        Flight newFlight(flightId, departure, destination, distance, *selectedAircraft, passengers);
         newFlight.checkAircraftCompatibility();
+        newFlight.checkPassengersCompatibility();
         manager.addFlight(newFlight);
         manager.saveToFile();
         std::cout << "Добавен успешно!\n";

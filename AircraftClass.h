@@ -4,8 +4,12 @@
 #include <iostream>
 #include <string>
 
+#include "Type.h"
+
 class AircraftClass {
+    //type( A,B, C)
 private:
+    Type type;
     std::string manufacturer;
     std::string model;
     int seats;
@@ -18,6 +22,10 @@ public:
     AircraftClass();
     AircraftClass(std::string manufacturer, std::string model, int seats, double minRunwayLength,
                   double fuelConsumptionPerKMPerSeat, double fuelTankCapacity, double averageSpeed);
+
+    Type getType() const;
+
+    void setType(Type type);
 
     std::string getManufacturer() const;
     void setManufacturer(const std::string& manufacturer);
@@ -41,6 +49,8 @@ public:
     void setAverageSpeed(double averageSpeed);
 
     double calculateMaxFlightDistance() const;
+
+    void autoDetermineType();
 
     friend std::ostream& operator<<(std::ostream& os, const AircraftClass& aircraftClass);
 };

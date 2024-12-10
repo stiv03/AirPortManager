@@ -11,13 +11,16 @@ private:
     std::string departure;
     std::string destination;
     double distance;
+    int passengers;
     Aircraft aircraft;
     double flightDuration;
+
+    //passengers
 
 public:
     Flight();
     Flight(const std::string& flightId, const std::string& departure, const std::string& destination,
-           double distance, const Aircraft& aircraft);
+           double distance, const Aircraft& aircraft, int passengers);
 
     std::string getFlightId() const;
     void setFlightId(const std::string& flightId);
@@ -31,17 +34,20 @@ public:
     double getDistance() const;
     void setDistance(double distance);
 
+    int getPassengers() const;
+    void setPassengers(int passengers);
+
     double calculateFlightDuration();
 
     double calculateFlightCost() const;
-
-    double calculateFlightCost();
 
     Aircraft getAircraft() const;
 
     void setAircraft(const Aircraft &aircraft);
 
     void checkAircraftCompatibility() const;
+    void checkPassengersCompatibility() const;
+
 
     friend std::ostream& operator<<(std::ostream& os, const Flight& flight);
 

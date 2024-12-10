@@ -51,6 +51,7 @@ double Aircraft::calculateFlightCost(double distance, int passengers) const {
 std::ostream& operator<<(std::ostream& os, const Aircraft& aircraft) {
     os << "Информация за самолета:\n"
        << "ID на самолета: " << aircraft.aircraftId << "\n"
+       << "Клас: " << aircraft.getAircraftClass().getType() << "\n"
        << "Производител: " << aircraft.getAircraftClass().getManufacturer() << "\n"
        << "Модел: " << aircraft.getAircraftClass().getModel() << "\n"
        << "Брой места: " << aircraft.getAircraftClass().getSeats() << "\n"

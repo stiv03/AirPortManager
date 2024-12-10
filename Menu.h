@@ -6,9 +6,9 @@
 
 class Menu {
 private:
-    FlightManager& manager; // Референция към обекта на FlightManager
+    FlightManager& manager;
 public:
-    Menu(FlightManager& manager); // Конструктор
+    Menu(FlightManager& manager);
 
     void displayMenu() const;
     void handleAddAircraft();
