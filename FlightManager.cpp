@@ -4,6 +4,7 @@
 #include <vector>
 #include <exception>
 
+
 void FlightManager::addFlight(const Flight& flight) {
     for (const auto& existingFlight : flights) {
         if (existingFlight.getFlightId() == flight.getFlightId()) {
