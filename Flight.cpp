@@ -88,7 +88,7 @@ void Flight::checkPassengersCompatibility() const {
     if (passengers > aircraft.getAircraftClass().getSeats()) {
         throw std::invalid_argument("Броя на пасажерите e прекалено голямо за този самолет, самолета не е съвместим");
     }
-    std::cout << "Броя на пасажерите е съвместим с този самолет " << std::endl;
+
 }
 
 
@@ -96,7 +96,7 @@ void Flight::checkAircraftCompatibility() const {
     if (distance > aircraft.getAircraftClass().calculateMaxFlightDistance()) {
         throw std::invalid_argument("Разстоянието e прекалено голямо за този самолет, самолета не е съвместим");
     }
-    std::cout << "Самолета е съвместим за тази дестинация " << std::endl;
+
 }
 
 std::ostream& operator<<(std::ostream& os, const Flight& flight) {

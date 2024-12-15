@@ -73,31 +73,45 @@ void Menu::handleAddFlight() {
     std::cout << "Въведете разстояние (км): ";
     std::cin >> distance;
 
-    std::cout << "Въведете ID на самолета, който да бъде назначен за този полет: ";
-
-    std::cin >> aircraftId;
-
     std::cout << "Въведете броя на пасажерите: ";
     std::cin >> passengers;
 
-    Aircraft* selectedAircraft = nullptr;
+    std::vector<Aircraft> compatibleAircrafts;
     for (const auto& aircraft : manager.getAircrafts()) {
-        if (aircraft.getAircraftId() == aircraftId) {
-            selectedAircraft = new Aircraft(aircraft);
-            break;
+        try {
+            Flight tempFlight(flightId, departure, destination, distance, aircraft, passengers);
+            tempFlight.checkAircraftCompatibility();
+            tempFlight.checkPassengersCompatibility();
+            compatibleAircrafts.push_back(aircraft);
+        } catch (const std::invalid_argument& e) {
         }
     }
-
-    if (selectedAircraft) {
-        Flight newFlight(flightId, departure, destination, distance, *selectedAircraft, passengers);
-        newFlight.checkAircraftCompatibility();
-        newFlight.checkPassengersCompatibility();
-        manager.addFlight(newFlight);
-        manager.saveToFile();
-        std::cout << "Добавен успешно!\n";
-    } else {
-        std::cout << "Самолет с ID " << aircraftId << " не е намерен!\n";
+    if (compatibleAircrafts.empty()) {
+        std::cout << "Няма налични съвместими самолети за този полет!\n";
+        return;
     }
+
+    std::cout << "Подходящи самолети за полета са:\n";
+    for (size_t i = 0; i < compatibleAircrafts.size(); ++i) {
+        std::cout << i + 1 << ". " << compatibleAircrafts[i].getAircraftId() << " (" << compatibleAircrafts[i].getAircraftClass().getSeats() << " места, макс разстояние "
+        << compatibleAircrafts[i].getAircraftClass().calculateMaxFlightDistance() << " км и цена "
+        << compatibleAircrafts[i].calculateFlightCost(distance,compatibleAircrafts[i].getAircraftClass().getSeats()) << " $)\n";
+    }
+
+    size_t choice = 0;
+    do {
+        std::cout << "Изберете самолет (1-" << compatibleAircrafts.size() << "): ";
+        std::cin >> choice;
+    } while (choice < 1 || choice > compatibleAircrafts.size());
+
+    Aircraft selectedAircraft = compatibleAircrafts[choice - 1];
+
+    Flight newFlight(flightId, departure, destination, distance, selectedAircraft, passengers);
+    newFlight.checkAircraftCompatibility();
+    newFlight.checkPassengersCompatibility();
+    manager.addFlight(newFlight);
+    manager.saveToFile();
+    std::cout << "Добавен успешно!\n";
 }
 
 void Menu::handleViewAllAircrafts() const {

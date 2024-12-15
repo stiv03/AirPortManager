@@ -9,7 +9,7 @@ void FlightManager::addFlight(const Flight& flight) {
     for (const auto& existingFlight : flights) {
         if (existingFlight.getFlightId() == flight.getFlightId()) {
             std::cerr << "Полет с ID " << flight.getFlightId() << " вече съществува.\n";
-            return; // Вече съществува, не го добавяме отново
+            return;
         }
     }
     flights.push_back(flight);
@@ -19,7 +19,7 @@ void FlightManager::addAircraft(const Aircraft& aircraft) {
     for (const auto& existingAircraft : aircrafts) {
         if (existingAircraft.getAircraftId() == aircraft.getAircraftId()) {
             std::cerr << "Самолет с ID " << aircraft.getAircraftId() << " вече съществува.\n";
-            return; // Вече съществува, не го добавяме отново
+            return;
         }
     }
     aircrafts.push_back(aircraft);
@@ -62,13 +62,13 @@ void FlightManager::saveToFile() const {
             return;
         }
 
-        // Изчистваме съдържанието на файла и след това записваме
-        std::ofstream aircraftFile("aircrafts.txt", std::ios::out); // std::ios::out по подразбиране "truncate"-ва файла
+
+        std::ofstream aircraftFile("aircrafts.txt", std::ios::out);
         if (!aircraftFile) {
             throw std::ios_base::failure("Неуспешно отваряне на файла aircrafts.txt");
         }
 
-        std::ofstream flightFile("flights.txt", std::ios::out); // std::ios::out по подразбиране изтрива старото съдържание
+        std::ofstream flightFile("flights.txt", std::ios::out);
         if (!flightFile) {
             throw std::ios_base::failure("Неуспешно отваряне на файла flights.txt");
         }
@@ -100,7 +100,6 @@ void FlightManager::saveToFile() const {
 }
 
 void FlightManager::loadFromFile() {
-    // Изчистваме списъците с самолети и полети, за да не добавяме дублиращи записи
     aircrafts.clear();
     flights.clear();
 
