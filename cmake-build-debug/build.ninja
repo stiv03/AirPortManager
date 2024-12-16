@@ -51,37 +51,37 @@ build cmake_object_order_depends_target_AirPort: phony || .
 
 build CMakeFiles/AirPort.dir/main.cpp.o: CXX_COMPILER__AirPort_unscanned_Debug /Users/stoyanivanov/Desktop/AirPort/main.cpp || cmake_object_order_depends_target_AirPort
   DEP_FILE = CMakeFiles/AirPort.dir/main.cpp.o.d
-  FLAGS = -g -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -fcolor-diagnostics
+  FLAGS = -g -std=c++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -fcolor-diagnostics
   OBJECT_DIR = CMakeFiles/AirPort.dir
   OBJECT_FILE_DIR = CMakeFiles/AirPort.dir
 
 build CMakeFiles/AirPort.dir/AircraftClass.cpp.o: CXX_COMPILER__AirPort_unscanned_Debug /Users/stoyanivanov/Desktop/AirPort/AircraftClass.cpp || cmake_object_order_depends_target_AirPort
   DEP_FILE = CMakeFiles/AirPort.dir/AircraftClass.cpp.o.d
-  FLAGS = -g -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -fcolor-diagnostics
+  FLAGS = -g -std=c++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -fcolor-diagnostics
   OBJECT_DIR = CMakeFiles/AirPort.dir
   OBJECT_FILE_DIR = CMakeFiles/AirPort.dir
 
 build CMakeFiles/AirPort.dir/Aircraft.cpp.o: CXX_COMPILER__AirPort_unscanned_Debug /Users/stoyanivanov/Desktop/AirPort/Aircraft.cpp || cmake_object_order_depends_target_AirPort
   DEP_FILE = CMakeFiles/AirPort.dir/Aircraft.cpp.o.d
-  FLAGS = -g -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -fcolor-diagnostics
+  FLAGS = -g -std=c++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -fcolor-diagnostics
   OBJECT_DIR = CMakeFiles/AirPort.dir
   OBJECT_FILE_DIR = CMakeFiles/AirPort.dir
 
 build CMakeFiles/AirPort.dir/Flight.cpp.o: CXX_COMPILER__AirPort_unscanned_Debug /Users/stoyanivanov/Desktop/AirPort/Flight.cpp || cmake_object_order_depends_target_AirPort
   DEP_FILE = CMakeFiles/AirPort.dir/Flight.cpp.o.d
-  FLAGS = -g -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -fcolor-diagnostics
+  FLAGS = -g -std=c++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -fcolor-diagnostics
   OBJECT_DIR = CMakeFiles/AirPort.dir
   OBJECT_FILE_DIR = CMakeFiles/AirPort.dir
 
 build CMakeFiles/AirPort.dir/FlightManager.cpp.o: CXX_COMPILER__AirPort_unscanned_Debug /Users/stoyanivanov/Desktop/AirPort/FlightManager.cpp || cmake_object_order_depends_target_AirPort
   DEP_FILE = CMakeFiles/AirPort.dir/FlightManager.cpp.o.d
-  FLAGS = -g -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -fcolor-diagnostics
+  FLAGS = -g -std=c++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -fcolor-diagnostics
   OBJECT_DIR = CMakeFiles/AirPort.dir
   OBJECT_FILE_DIR = CMakeFiles/AirPort.dir
 
 build CMakeFiles/AirPort.dir/Menu.cpp.o: CXX_COMPILER__AirPort_unscanned_Debug /Users/stoyanivanov/Desktop/AirPort/Menu.cpp || cmake_object_order_depends_target_AirPort
   DEP_FILE = CMakeFiles/AirPort.dir/Menu.cpp.o.d
-  FLAGS = -g -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -fcolor-diagnostics
+  FLAGS = -g -std=c++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -fcolor-diagnostics
   OBJECT_DIR = CMakeFiles/AirPort.dir
   OBJECT_FILE_DIR = CMakeFiles/AirPort.dir
 
