@@ -102,6 +102,14 @@ void Menu::handleAddFlight() {
     do {
         std::cout << "Изберете самолет (1-" << compatibleAircrafts.size() << "): ";
         std::cin >> choice;
+
+        if (std::cin.fail()) {
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            std::cout << "Невалиден избор. Моля въведете число.\n";
+            continue;
+        }
+
     } while (choice < 1 || choice > compatibleAircrafts.size());
 
     Aircraft selectedAircraft = compatibleAircrafts[choice - 1];
