@@ -1,4 +1,5 @@
 #include "Menu.h"
+#include <iomanip>
 
 Menu::Menu(FlightManager& manager) : manager(manager) {}
 
@@ -95,7 +96,7 @@ void Menu::handleAddFlight() {
     for (size_t i = 0; i < compatibleAircrafts.size(); ++i) {
         std::cout << i + 1 << ". " << compatibleAircrafts[i].getAircraftId() << " (" << compatibleAircrafts[i].getAircraftClass().getSeats() << " места, макс разстояние "
         << compatibleAircrafts[i].getAircraftClass().calculateMaxFlightDistance() << " км и цена "
-        << compatibleAircrafts[i].calculateFlightCost(distance,compatibleAircrafts[i].getAircraftClass().getSeats()) << " $)\n";
+        << std::fixed << std::setprecision(0)<< compatibleAircrafts[i].calculateFlightCost(distance,compatibleAircrafts[i].getAircraftClass().getSeats()) << " $)\n";
     }
 
     size_t choice = 0;
