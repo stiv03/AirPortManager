@@ -21,12 +21,12 @@ AircraftClass::AircraftClass(std::string manufacturer, std::string model, int se
 void AircraftClass::autoDetermineType() {
     if (seats < 100 && minRunwayLength < 2000) {
         type = Type::A; // Малък самолет
-    } else if (seats >= 100 && seats <= 200 &&
-               minRunwayLength >= 2000 && minRunwayLength <= 3000) {
+    } else if (seats >= 100 && seats < 200 &&
+               minRunwayLength >= 2000 && minRunwayLength < 3000) {
         type = Type::B; // Среден самолет
-               } else {
+               } else if (seats >= 200 && seats <= 300 && minRunwayLength >= 3000) {
                    type = Type::C; // Голям самолет
-               }
+                    }else throw std::invalid_argument("Несъвместим с никой клас");
 }
 
 Type AircraftClass::getType() const {
