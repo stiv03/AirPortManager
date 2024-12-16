@@ -12,7 +12,17 @@ int main() {
 
     do {
         menu.displayMenu();
+
+        std::cout << "Въведете вашия избор: ";
         std::cin >> choice;
+
+        if (std::cin.fail()) {
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            std::cout << "Невалиден избор. Моля въведете число.\n";
+            continue;
+        }
+
 
         switch (choice) {
             case 1:

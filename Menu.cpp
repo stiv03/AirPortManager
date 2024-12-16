@@ -11,7 +11,6 @@ void Menu::displayMenu() const {
     std::cout << "4. Преглед на всички полети\n";
     std::cout << "5. Търсене на полети по дестинация\n";
     std::cout << "6. Изход\n";
-    std::cout << "Въведете вашия избор: ";
 }
 
 
@@ -127,7 +126,7 @@ void Menu::handleViewAllFlights() const {
 
 void Menu::handleFindFlightsByDestination() const {
     std::string destination;
-    std::cout << "Въведете дестинация за търсне на полет ";
+    std::cout << "Въведете дестинация за търсне на полет: ";
     std::cin >> destination;
 
     std::vector<Flight> flights = manager.findFlightsByDestination(destination);
